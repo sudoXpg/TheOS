@@ -21,7 +21,7 @@ _start:
     or al, 2
     out 0x92, al
     
-    call kernel_start
+    call kernel_init
     jmp $
 
 times 510 - ($-$$) db 0
