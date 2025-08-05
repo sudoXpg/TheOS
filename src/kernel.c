@@ -1,6 +1,7 @@
 #include "kernel.h"
 #include "display/display.h"
 #include "idt/idt.h"
+#include "port/port.h"
 
 
 uint16_t *videomem = (uint16_t *)VGA_ADDRESS;
@@ -19,5 +20,6 @@ void kernel_init(void){
 
     idt_init();
 
+    out_byte(0x11, 'A');
 
 }
