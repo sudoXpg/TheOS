@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "types.h": "c",
+        "timesize.h": "c",
+        "wordsize.h": "c",
+        "mem.h": "c"
+    }
+}
