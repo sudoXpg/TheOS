@@ -1,4 +1,4 @@
-FILES = ./build/kernel.asm.o ./build/kernel.o ./build/display/display.o ./build/string/string.o ./build/memory/mem.o ./build/idt/idt.o ./build/idt/idt.asm.o ./build/port/port.asm.o
+FILES = ./build/kernel.asm.o ./build/kernel.o ./build/display/display.o ./build/string/string.o ./build/memory/mem.o ./build/idt/idt.o ./build/idt/idt.asm.o ./build/port/port.asm.o ./build/heap/heap.o ./build/heap/kheap.o
 INCLUDES = -I./src
 FLAGS = -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wno-unused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc -std=gnu99
 
@@ -41,6 +41,12 @@ all: ./bin/boot.bin ./bin/kernel.bin
 
 ./build/port/port.asm.o : ./src/port/port.asm
 	nasm -f elf -g ./src/port/port.asm -o ./build/port/port.asm.o
+
+./build/heap/heap.o : ./src/heap/heap.c
+	i686-elf-gcc $(INCLUDES) $(FLAGS) -c ./src/heap/heap.c -o ./build/heap/heap.o
+
+./build/heap/kheap.o : ./src/heap/kheap.c
+	i686-elf-gcc $(INCLUDES) $(FLAGS) -c ./src/heap/kheap.c -o ./build/heap/kheap.o
 
 
 clean:

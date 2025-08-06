@@ -2,6 +2,7 @@
 #include "display/display.h"
 #include "idt/idt.h"
 #include "port/port.h"
+#include "heap/kheap.h"
 
 
 uint16_t *videomem = (uint16_t *)VGA_ADDRESS;
@@ -19,7 +20,5 @@ void kernel_init(void){
     print("Welcome to TheOS\n-v0.01");
 
     idt_init();
-
-    out_byte(0x11, 'A');
-
+    kheap_init();
 }
