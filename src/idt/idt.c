@@ -5,6 +5,17 @@ struct idtr_desc idtr;
 
 
 extern void idt_load(struct idtr_desc* ptr);
+extern void int21h();
+extern void no_interrupt();
+
+void int21h_handler(){
+    print("\nKey pressed\n");
+    out_byte(0x20, 0x20); //End of Interrupt (EOI) signal
+}
+
+void no_interrupt_handler(){
+    out_byte(0x20, 0x20); // End of Interrupt (EOI) signal
+}
 
 void idt_zero(){
     print("\nDIV BY ZERO\n");
@@ -26,7 +37,12 @@ void idt_init(){
     idtr.limit = size_IDT-1;
     idtr.base = (uint32_t) IDT_desc;
 
+    for (int i = 0; i < THEOS_MAX_INTS; i++){
+        idt_set(i, no_interrupt);
+    }
+
     idt_set(0, idt_zero);
+    idt_set(0x21, int21h);
 
     idt_load(&idtr);
 }

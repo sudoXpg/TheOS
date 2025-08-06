@@ -7,6 +7,7 @@
 #include "../kerconfy.h"
 #include "../kernel.h"
 #include "../memory/mem.h"
+#include "../port/port.h"
 
 struct InterruptDescriptor32 {
    uint16_t offset_1;        // offset bits 0..15
