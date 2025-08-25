@@ -21,4 +21,6 @@ void kernel_init(void){
 
     idt_init();
     kheap_init();
+
+    enable_interrupts();
 }

@@ -7,6 +7,8 @@ struct idtr_desc idtr;
 extern void idt_load(struct idtr_desc* ptr);
 extern void int21h();
 extern void no_interrupt();
+extern void enable_interrupts();
+extern void disable_interrupts();
 
 void int21h_handler(){
     print("\nKey pressed\n");
@@ -45,4 +47,5 @@ void idt_init(){
     idt_set(0x21, int21h);
 
     idt_load(&idtr);
+    enable_interrupts();
 }
